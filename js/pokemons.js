@@ -3480,12 +3480,16 @@ var elList = document.querySelector('.js-list');
 for (item of pokemons) {
 	var itemBox = document.createElement('li');
 	var newItem = document.createElement('div');
+	var newSpanBox = document.createElement('div');
+	newSpanBox.style.display = 'flex';
+	newSpanBox.style.justifyContent = 'space-between';
+
 	var elId = document.createElement('span');
 	elId.textContent = `Id: ${item.id}`;
-	elId.style.display = 'block';
 
 	var elNum = document.createElement('span');
 	elNum.textContent = `Number: ${item.num}`;
+	elNum.classList.add('mb-3');
 
 	var elName = document.createElement('h2');
 	elName.textContent = `${item.name}`;
@@ -3494,7 +3498,7 @@ for (item of pokemons) {
 	elImg.src = item.img;
 
 	var elInfo = document.createElement('p');
-	elInfo.textContent = `Type pokemon: ${item.type}`;
+	elInfo.textContent = `Type : ${item.type}`;
 
 	var elWeak = document.createElement('p');
 	elWeak.textContent = `Weaknesses: ${item.weaknesses}`;
@@ -3503,13 +3507,14 @@ for (item of pokemons) {
 	elEvolution.textContent = `Next evalution: ${item.new_evolution}`;
 
 	newItem.appendChild(elId);
-	newItem.appendChild(elNum);
 	newItem.appendChild(elName);
 	newItem.appendChild(elImg);
+	newItem.appendChild(elNum);
 	newItem.appendChild(elInfo);
 	newItem.appendChild(elWeak);
 	// newItem.appendChild(elEvolution);
 	itemBox.appendChild(newItem);
 	elList.appendChild(itemBox);
-	itemBox.classList.add('col-4');
+	itemBox.classList.add('col-md-12');
+	itemBox.classList.add('col-lg-4');
 }
