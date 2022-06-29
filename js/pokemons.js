@@ -3518,3 +3518,74 @@ for (item of pokemons) {
 	itemBox.classList.add('col-md-12');
 	itemBox.classList.add('col-lg-4');
 }
+
+var elSelect = document.querySelector('.js-select');
+
+const filled = new Set();
+
+for (poc of pokemons) {
+	poc.type.forEach((el) => {
+		filled.add(el);
+	});
+}
+
+filled.forEach((item) => {
+	let opt = document.createElement('option');
+	opt.value = item;
+	opt.textContent = item;
+	elSelect.appendChild(opt);
+});
+
+elSelect.addEventListener('change', (evt) => {
+	evt.preventDefault();
+	var result = [];
+	var typeVal = elSelect.value;
+	elList.innerHTML = '';
+	pokemons.forEach((el) => {
+		if (el.type.includes(typeVal)) {
+			result.push(el);
+		}
+	});
+
+	for (item of result) {
+		var itemBox = document.createElement('li');
+		var newItem = document.createElement('div');
+		var newSpanBox = document.createElement('div');
+		newSpanBox.style.display = 'flex';
+		newSpanBox.style.justifyContent = 'space-between';
+
+		var elId = document.createElement('span');
+		elId.textContent = `Id: ${item.id}`;
+
+		var elNum = document.createElement('span');
+		elNum.textContent = `Number: ${item.num}`;
+		elNum.classList.add('mb-3');
+
+		var elName = document.createElement('h2');
+		elName.textContent = `${item.name}`;
+
+		var elImg = document.createElement('img');
+		elImg.src = item.img;
+
+		var elInfo = document.createElement('p');
+		elInfo.textContent = `Type : ${item.type}`;
+
+		var elWeak = document.createElement('p');
+		elWeak.textContent = `Weaknesses: ${item.weaknesses}`;
+
+		var elEvolution = document.createElement('span');
+		elEvolution.textContent = `Next evalution: ${item.new_evolution}`;
+
+		newItem.appendChild(elId);
+		newItem.appendChild(elName);
+		newItem.appendChild(elImg);
+		newItem.appendChild(elNum);
+		newItem.appendChild(elInfo);
+		newItem.appendChild(elWeak);
+		// newItem.appendChild(elEvolution);
+		itemBox.appendChild(newItem);
+		elList.appendChild(itemBox);
+		itemBox.classList.add('col-md-12');
+		itemBox.classList.add('col-lg-4');
+	}
+});
